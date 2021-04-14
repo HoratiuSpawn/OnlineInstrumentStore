@@ -31,7 +31,7 @@ namespace OnlineInstrumentStore.Controllers
         // GET: Instrument/Create
         public ActionResult Create()
         {
-            return View("CreateInstrument");
+            return View("Create");
         }
 
         // POST: Instrument/Create
@@ -49,7 +49,7 @@ namespace OnlineInstrumentStore.Controllers
             }
             catch
             {
-                return View("CreateInstrument");
+                return View("Create");
             }
         }
 
