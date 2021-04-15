@@ -11,29 +11,30 @@ namespace OnlineInstrumentStore.Controllers
     public class InstrumentController : Controller
     {
         private InstrumentRepository instrumentRepository = new InstrumentRepository();
-                
 
+        
         // GET: Instrument
         public ActionResult Index()
         {
             List<InstrumentModels> instruments = instrumentRepository.GetAllInstruments();
 
-            return View("Index", instruments);
+            return View("IndexInstrument", instruments);
         }
 
+        
         // GET: Instrument/Details/5
         public ActionResult Details(Guid id)
         {
             InstrumentModels instrumentModels = instrumentRepository.GetInstrumentById(id);
             return View("InstrumentDetails", instrumentModels);
         }
-
+        
         // GET: Instrument/Create
         public ActionResult Create()
         {
             return View("Create");
         }
-
+        
         // POST: Instrument/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -42,6 +43,12 @@ namespace OnlineInstrumentStore.Controllers
             {
                 InstrumentModels instrumentModels = new InstrumentModels();
                 UpdateModel(instrumentModels);
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    instrumentModels.InstrumentType = User.Identity.Name + ":" + instrumentModels.InstrumentType;
+                    instrumentModels.InstrumentName = instrumentModels.InstrumentName + ":" + User.Identity.Name;
+                }
 
                 instrumentRepository.InsertInstrument(instrumentModels);
 
@@ -52,48 +59,54 @@ namespace OnlineInstrumentStore.Controllers
                 return View("Create");
             }
         }
-
+        
         // GET: Instrument/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
-        }
+            InstrumentModels instrumentModels = instrumentRepository.GetInstrumentById(id);
 
+            return View("EditInstrument", instrumentModels);
+        }
+        
         // POST: Instrument/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                InstrumentModels instrumentModels = new InstrumentModels();
+                UpdateModel(instrumentModels);
+                instrumentRepository.UpdateInstrument(instrumentModels);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("EditInstrument");
             }
         }
-
+        
         // GET: Instrument/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            InstrumentModels instrumentModels = instrumentRepository.GetInstrumentById(id);
+            
+            return View("DeleteInstrument", instrumentModels);
         }
-
+        
         // POST: Instrument/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                instrumentRepository.DeleteInstrument(id);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteInstrument");
             }
         }
     }

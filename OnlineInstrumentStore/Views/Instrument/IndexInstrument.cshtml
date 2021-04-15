@@ -1,0 +1,64 @@
+﻿@model IEnumerable<OnlineInstrumentStore.Models.InstrumentModels>
+
+@{
+    ViewBag.Title = "IndexInstrument";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IndexInstrument</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDInstrument)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstrumentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDManufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstrumentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDInstrument)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstrumentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDManufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstrumentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDInstrument  }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IDInstrument }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IDInstrument })
+        </td>
+    </tr>
+}
+
+</table>
