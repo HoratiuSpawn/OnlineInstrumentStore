@@ -31,7 +31,7 @@ namespace OnlineInstrumentStore.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return View("");
+            return View("CreateCustomer");
         }
 
         // POST: Customer/Create
@@ -40,57 +40,68 @@ namespace OnlineInstrumentStore.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                CustomerModels customerModels = new CustomerModels();
+                UpdateModel(customerModels);
+
+                customerRepository.InsertCustomer(customerModels);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("CreateCustomer");
             }
         }
 
         // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            CustomerModels customerModels = customerRepository.GetCustomerById(id);
+
+            return View("EditCustomer", customerModels);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                CustomerModels customerModels = new CustomerModels();
+
+                UpdateModel(customerModels);
+
+                customerRepository.UpdateCustomer(customerModels);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("EditCustomer");
             }
         }
 
         // GET: Customer/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            CustomerModels customerModels = customerRepository.GetCustomerById(id);
+
+            return View("DeleteCustomer", customerModels);
         }
 
         // POST: Customer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                customerRepository.DeleteCustomer(id);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteCustomer");
             }
         }
     }
