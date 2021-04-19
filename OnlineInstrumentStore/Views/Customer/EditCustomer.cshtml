@@ -1,4 +1,4 @@
-﻿@model OnlineInstrumentStore.Models.DBObjects.Customer
+﻿@model OnlineInstrumentStore.Models.CustomerModels
 
 @{
     ViewBag.Title = "EditCustomer";
@@ -13,10 +13,10 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Customer</h4>
+        <h4>CustomerModels</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IDCustomer)
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
