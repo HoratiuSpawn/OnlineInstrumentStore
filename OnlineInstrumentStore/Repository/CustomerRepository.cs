@@ -33,7 +33,7 @@ namespace OnlineInstrumentStore.Repository
 
         public CustomerModels GetCustomerById(Guid ID)
         {
-            var customer = dbContext.Customers.FirstOrDefault(x => x.IDCustomer == ID);
+            Customer customer = dbContext.Customers.FirstOrDefault(x => x.IDCustomer == ID);
 
             return MapDbObjectToModel(customer);
         }

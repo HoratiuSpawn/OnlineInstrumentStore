@@ -16,7 +16,7 @@ namespace OnlineInstrumentStore.Controllers
         {
             List<OrderModels> orders = orderRepository.GetAllOrders();
 
-            return View("Index", orders);
+            return View("IndexOrders", orders);
         }
 
         // GET: Order/Details/5

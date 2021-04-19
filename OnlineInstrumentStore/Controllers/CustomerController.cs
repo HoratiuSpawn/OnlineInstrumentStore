@@ -17,7 +17,7 @@ namespace OnlineInstrumentStore.Controllers
         {
             List<CustomerModels> customers = customerRepository.GetAllCustomers();
 
-            return View("Index", customers);
+            return View("IndexCustomer", customers);
         }
 
         // GET: Customer/Details/5
@@ -45,7 +45,7 @@ namespace OnlineInstrumentStore.Controllers
 
                 customerRepository.InsertCustomer(customerModels);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCustomer");
             }
             catch
             {
@@ -73,7 +73,7 @@ namespace OnlineInstrumentStore.Controllers
 
                 customerRepository.UpdateCustomer(customerModels);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCustomer");
             }
             catch
             {
@@ -97,7 +97,7 @@ namespace OnlineInstrumentStore.Controllers
             {
                 customerRepository.DeleteCustomer(id);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCustomer");
             }
             catch
             {

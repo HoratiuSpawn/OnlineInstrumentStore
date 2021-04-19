@@ -58,7 +58,7 @@ namespace OnlineInstrumentStore.Controllers
         {
             ManufacturerModels manufacturerModels = manufacturerRepository.GetManufacturerById(id);
 
-            return View("EditManufacurer", manufacturerModels);
+            return View("EditManufacturer", manufacturerModels);
         }
 
         // POST: Manufacturer/Edit/5
@@ -77,7 +77,7 @@ namespace OnlineInstrumentStore.Controllers
             }
             catch
             {
-                return View("EditManufacurer");
+                return View("EditManufacturer");
             }
         }
 
