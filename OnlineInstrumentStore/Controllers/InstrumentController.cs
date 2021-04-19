@@ -28,13 +28,13 @@ namespace OnlineInstrumentStore.Controllers
             InstrumentModels instrumentModels = instrumentRepository.GetInstrumentById(id);
             return View("InstrumentDetails", instrumentModels);
         }
-        
+        [Authorize(Roles = "Admin")]
         // GET: Instrument/Create
         public ActionResult Create()
         {
             return View("Create");
         }
-        
+        [Authorize(Roles = "Admin")]
         // POST: Instrument/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -44,11 +44,6 @@ namespace OnlineInstrumentStore.Controllers
                 InstrumentModels instrumentModels = new InstrumentModels();
                 UpdateModel(instrumentModels);
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    instrumentModels.InstrumentType = User.Identity.Name + ":" + instrumentModels.InstrumentType;
-                    instrumentModels.InstrumentName = instrumentModels.InstrumentName + ":" + User.Identity.Name;
-                }
 
                 instrumentRepository.InsertInstrument(instrumentModels);
 
@@ -59,7 +54,7 @@ namespace OnlineInstrumentStore.Controllers
                 return View("Create");
             }
         }
-        
+        [Authorize(Roles = "Admin")]
         // GET: Instrument/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -67,7 +62,7 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("EditInstrument", instrumentModels);
         }
-        
+        [Authorize(Roles = "Admin")]
         // POST: Instrument/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
@@ -85,7 +80,7 @@ namespace OnlineInstrumentStore.Controllers
                 return View("EditInstrument");
             }
         }
-        
+        [Authorize(Roles = "Admin")]
         // GET: Instrument/Delete/5
         public ActionResult Delete(Guid id)
         {
@@ -93,7 +88,7 @@ namespace OnlineInstrumentStore.Controllers
             
             return View("DeleteInstrument", instrumentModels);
         }
-        
+        [Authorize(Roles = "Admin")]
         // POST: Instrument/Delete/5
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)
