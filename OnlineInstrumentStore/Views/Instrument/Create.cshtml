@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CreateInstrument</h2>
+<h2>Create Instrument</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>InstrumentModels</h4>
+        <h4>Create New Instrument</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         
@@ -30,6 +30,8 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.IDManufacturer, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IDManufacturer, "", new { @class = "text-danger" })
+               
+
             </div>
         </div>
 

@@ -37,6 +37,12 @@ namespace OnlineInstrumentStore.Repository
 
             return MapDbObjectToModel(customer);
         }
+        public CustomerModels GetCustomerByEmail(string email)
+        {
+            Customer customer = dbContext.Customers.FirstOrDefault(x => x.Email == email);
+
+            return MapDbObjectToModel(customer);
+        }
 
         public void InsertCustomer(CustomerModels customer)
         {

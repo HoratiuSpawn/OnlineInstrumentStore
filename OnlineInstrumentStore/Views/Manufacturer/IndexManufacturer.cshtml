@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>IndexManufacturer</h2>
+<h2>Index Manufacturers</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.IDManufacturer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ManufacturerName)
+            @Html.ActionLink("Manufaturer Name", "Index", new { sortOrder = ViewBag.NameSortParam})
         </th>
         <th></th>
     </tr>

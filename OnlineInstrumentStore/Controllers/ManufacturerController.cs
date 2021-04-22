@@ -13,9 +13,20 @@ namespace OnlineInstrumentStore.Controllers
         private ManufacturerRepository manufacturerRepository = new ManufacturerRepository();
 
         // GET: Manufacturer
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
+            ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "ManufacturerName" : "";
             List<ManufacturerModels> manufacturers = manufacturerRepository.GetAllManufacturers();
+
+            switch (sortOrder)
+            {
+                case "ManufacturerName":
+                    manufacturers = manufacturers.OrderByDescending(m => m.ManufacturerName).ToList();
+                    break;
+                default:
+                    manufacturers = manufacturers.OrderBy(m => m.ManufacturerName).ToList();
+                    break;
+            }
 
             return View("IndexManufacturer", manufacturers);
         }

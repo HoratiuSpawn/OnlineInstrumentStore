@@ -1,6 +1,7 @@
 ﻿using OnlineInstrumentStore.Models;
 using OnlineInstrumentStore.Repository;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,16 +13,44 @@ namespace OnlineInstrumentStore.Controllers
     {
         private InstrumentRepository instrumentRepository = new InstrumentRepository();
 
-        
+        private ManufacturerRepository manufacturerRepository = new ManufacturerRepository();
+
+
+
         // GET: Instrument
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
+
+            ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "InstrumentName" : "";
+            ViewBag.TypeSortParam = sortOrder == "InstrumentType" ? "InstrumentType_desc" : "InstrumentType";
+            List<InstrumentModels> instrument = instrumentRepository.GetAllInstruments();
+
+            switch (sortOrder)
+            {
+                case "InstrumentName":
+                    instrument = instrument.OrderByDescending(s => s.InstrumentName).ToList();
+                    break;
+                case "InstrumentType":
+                    instrument = instrument.OrderBy(s => s.InstrumentType).ToList();
+                    break;
+                case "InstrumentType_desc":
+                    instrument = instrument.OrderByDescending(s => s.InstrumentType).ToList();
+                    break;
+                default:
+                    instrument = instrument.OrderBy(s => s.InstrumentName).ToList();
+                    break;
+
+            }
+
+
             List<InstrumentModels> instruments = instrumentRepository.GetAllInstruments();
 
-            return View("IndexInstrument", instruments);
+
+
+            return View("IndexInstrument", instrument);
         }
 
-        
+
         // GET: Instrument/Details/5
         public ActionResult Details(Guid id)
         {
@@ -32,6 +61,12 @@ namespace OnlineInstrumentStore.Controllers
         // GET: Instrument/Create
         public ActionResult Create()
         {
+            //List<Guid> ManufacturerID = new List<Guid>();
+            //foreach (var item in manufacturerRepository.GetManufacturerById())
+            //{
+            //    ManufacturerID.Add(item.IDManufacturer);
+            //}
+            //ViewBag.ManufacturerName = ManufacturerID;
             return View("Create");
         }
         [Authorize(Roles = "Admin")]
@@ -85,7 +120,7 @@ namespace OnlineInstrumentStore.Controllers
         public ActionResult Delete(Guid id)
         {
             InstrumentModels instrumentModels = instrumentRepository.GetInstrumentById(id);
-            
+
             return View("DeleteInstrument", instrumentModels);
         }
         [Authorize(Roles = "Admin")]
@@ -104,5 +139,14 @@ namespace OnlineInstrumentStore.Controllers
                 return View("DeleteInstrument");
             }
         }
+
+        public ActionResult AddToCart(Guid id)
+        {
+            InstrumentModels instrumentModels = instrumentRepository.GetInstrumentById(id);
+
+            return View("AddToCart", instrumentModels);
+
+        }
+
     }
 }
