@@ -5,21 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create Order</h2>
+<h2>CreateOrder</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
-        
+        <h4>OrderModels</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
 
+        
 
-
-
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.DeliveryAddress, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -29,7 +30,7 @@
             </div>
         </div>
 
-
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -41,7 +41,7 @@ namespace OnlineInstrumentStore.Controllers
 
         // POST: Order/Create
         [HttpPost]
-        public ActionResult Create(Guid IDInstrument, FormCollection collection)
+        public ActionResult Create(Guid ID, FormCollection collection)
         {
 
 
@@ -51,9 +51,9 @@ namespace OnlineInstrumentStore.Controllers
                 InstrumentModels instrument = new InstrumentModels();
                 CustomerModels customer = new CustomerModels();
                 string email = User.Identity.Name;
-                instrument = InstrumentRepository.GetInstrumentById(IDInstrument);
+                instrument = InstrumentRepository.GetInstrumentById(ID);
                 UpdateModel(orderModels);
-                orderModels.IDInstrument = IDInstrument;
+                orderModels.IDInstrument = ID;
                 orderModels.IDCustomer = CustomerRepository.GetCustomerByEmail(email).IdCustomer;
                 orderModels.Date = DateTime.UtcNow;
                 orderModels.TotalPrice = orderModels.Quantity * instrument.Price;
@@ -83,9 +83,12 @@ namespace OnlineInstrumentStore.Controllers
         {
             try
             {
+                InstrumentModels instrument = new InstrumentModels();
                 OrderModels orderModels = new OrderModels();
-
+                orderModels= orderRepository.GetOrderById(id);
+                instrument = InstrumentRepository.GetInstrumentById(orderModels.IDInstrument);
                 UpdateModel(orderModels);
+                orderModels.TotalPrice = orderModels.Quantity * instrument.Price;
 
                 orderRepository.UpdateOrder(orderModels);
 

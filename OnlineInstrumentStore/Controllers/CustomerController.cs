@@ -45,7 +45,7 @@ namespace OnlineInstrumentStore.Controllers
 
                 customerRepository.InsertCustomer(customerModels);
 
-                return RedirectToAction("IndexCustomer");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -70,10 +70,11 @@ namespace OnlineInstrumentStore.Controllers
                 CustomerModels customerModels = new CustomerModels();
 
                 UpdateModel(customerModels);
+                customerModels.IdCustomer = id;
 
                 customerRepository.UpdateCustomer(customerModels);
 
-                return RedirectToAction("IndexCustomer");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -97,7 +98,7 @@ namespace OnlineInstrumentStore.Controllers
             {
                 customerRepository.DeleteCustomer(id);
 
-                return RedirectToAction("IndexCustomer");
+                return RedirectToAction("Index");
             }
             catch
             {
