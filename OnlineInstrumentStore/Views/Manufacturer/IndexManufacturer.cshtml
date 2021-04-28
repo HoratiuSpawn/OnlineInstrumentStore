@@ -7,34 +7,44 @@
 
 <h2>Index Manufacturers</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table class="table">
     <tr>
+        
         <th>
-            @Html.DisplayNameFor(model => model.IDManufacturer)
-        </th>
-        <th>
-            @Html.ActionLink("Manufaturer Name", "Index", new { sortOrder = ViewBag.NameSortParam})
+            @Html.ActionLink("Manufaturer Name", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDManufacturer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ManufacturerName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDManufacturer  }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IDManufacturer }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IDManufacturer })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.ManufacturerName)
+            </td>
+            <td style="font-size:12px;">
+                @if (User.IsInRole("User"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.IDManufacturer })
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.IDManufacturer })
+                    <br />
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDManufacturer })
+                    <br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDManufacturer })
+                }
+
+            </td>
+        </tr>
+    }
 
 </table>

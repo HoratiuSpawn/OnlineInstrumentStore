@@ -7,17 +7,20 @@
 
 <h2>Index Instrument</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table class="table">
     <tr>
-        
+
         <th>
             @Html.ActionLink("Instrument Name", "Index", new { sortOrder = ViewBag.NameSortParam })
 
         </th>
-        
+
         <th>
             @Html.ActionLink("Instrument Type", "Index", new { sortOrder = ViewBag.TypeSortParam })
         </th>
@@ -30,29 +33,44 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.InstrumentName)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.InstrumentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IDInstrument }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IDInstrument }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IDInstrument })
-            @Html.ActionLink("Add To Cart", "Create", "Order", new { id = item.IDInstrument }, null) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.InstrumentName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.InstrumentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td style="font-size:12px;">
+                <br />
+                <br />
+                @if (User.IsInRole("User"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.IDInstrument })
+                    <br />
+                    @Html.ActionLink("Add To Cart", "Create", "Order", new { id = item.IDInstrument }, null)
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.IDInstrument })
+                    <br />
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDInstrument })
+                    <br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDInstrument })
+                }
+
+
+            </td>
+        </tr>
+    }
 
 </table>
