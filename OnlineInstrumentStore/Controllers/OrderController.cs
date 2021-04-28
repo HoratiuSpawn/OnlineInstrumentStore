@@ -15,16 +15,29 @@ namespace OnlineInstrumentStore.Controllers
         private InstrumentRepository InstrumentRepository = new InstrumentRepository();
 
         private CustomerRepository CustomerRepository = new CustomerRepository();
-        
 
+        [Authorize(Roles = "User, Admin")]
         // GET: Order
         public ActionResult Index()
         {
-            List<OrderModels> orders = orderRepository.GetAllOrders();
+            List<OrderModels> orders = orderRepository.GetAllOrdersByCustomer(CustomerRepository.GetCustomerByEmail(User.Identity.Name).IdCustomer);
+            List<OrderViewModel> orderViewModels = new List<OrderViewModel>();
 
-            return View("IndexOrders", orders);
+            foreach (OrderModels item in orders)
+            {
+                OrderViewModel orderViewModel= new OrderViewModel();
+                orderViewModel.IDOrder = item.IDOrder;
+                orderViewModel.Data = item.Date;
+                orderViewModel.DeliveryAddress = item.DeliveryAddress;
+                orderViewModel.IDInstrumentName = InstrumentRepository.GetInstrumentById(item.IDInstrument).InstrumentName;
+                orderViewModel.Quantity = item.Quantity;
+                orderViewModel.TotalPrice = item.TotalPrice;
+                orderViewModels.Add(orderViewModel);
+            }
+
+            return View("IndexOrders", orderViewModels);
         }
-
+        [Authorize(Roles = "User, Admin")]
         // GET: Order/Details/5
         public ActionResult Details(Guid id)
         {
@@ -32,13 +45,13 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("OrderDetails", orderModels);
         }
-
+        [Authorize(Roles = "User, Admin")]
         // GET: Order/Create
         public ActionResult Create()
         {
             return View("CreateOrder");
         }
-
+        [Authorize(Roles = "User, Admin")]
         // POST: Order/Create
         [HttpPost]
         public ActionResult Create(Guid ID, FormCollection collection)
@@ -68,7 +81,7 @@ namespace OnlineInstrumentStore.Controllers
                 return View("CreateOrder");
             }
         }
-
+        [Authorize(Roles = "User, Admin")]
         // GET: Order/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -76,7 +89,7 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("EditOrder", orderModels);
         }
-
+        [Authorize(Roles = "User, Admin")]
         // POST: Order/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
@@ -99,7 +112,7 @@ namespace OnlineInstrumentStore.Controllers
                 return View("EditOrder");
             }
         }
-
+        [Authorize(Roles = "User, Admin")]
         // GET: Order/Delete/5
         public ActionResult Delete(Guid id)
         {
@@ -107,7 +120,7 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("DeleteOrder", orderModels);
         }
-
+        [Authorize(Roles = "User, Admin")]
         // POST: Order/Delete/5
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)

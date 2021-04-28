@@ -16,7 +16,7 @@ namespace OnlineInstrumentStore.Controllers
         private ManufacturerRepository manufacturerRepository = new ManufacturerRepository();
 
 
-
+        [Authorize(Roles = "User, Admin")]
         // GET: Instrument
         public ActionResult Index(string sortOrder)
         {
@@ -50,7 +50,7 @@ namespace OnlineInstrumentStore.Controllers
             return View("IndexInstrument", instrument);
         }
 
-
+        [Authorize(Roles = "User, Admin")]
         // GET: Instrument/Details/5
         public ActionResult Details(Guid id)
         {

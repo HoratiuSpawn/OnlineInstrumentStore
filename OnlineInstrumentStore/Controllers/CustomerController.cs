@@ -11,7 +11,7 @@ namespace OnlineInstrumentStore.Controllers
     public class CustomerController : Controller
     {
         private CustomerRepository customerRepository = new CustomerRepository();
-
+        [Authorize(Roles = "Admin, User")]
         // GET: Customer
         public ActionResult Index()
         {
@@ -19,7 +19,7 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("IndexCustomer", customers);
         }
-
+        [Authorize(Roles = "Admin, User")]
         // GET: Customer/Details/5
         public ActionResult Details(Guid id)
         {
@@ -27,13 +27,13 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("CustomerDetails", customerModels);
         }
-
+        [Authorize(Roles = "Admin, User")]
         // GET: Customer/Create
         public ActionResult Create()
         {
             return View("CreateCustomer");
         }
-
+        [Authorize(Roles = "Admin, User")]
         // POST: Customer/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -52,7 +52,7 @@ namespace OnlineInstrumentStore.Controllers
                 return View("CreateCustomer");
             }
         }
-
+        [Authorize(Roles = "Admin, User")]
         // GET: Customer/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -60,7 +60,7 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("EditCustomer", customerModels);
         }
-
+        [Authorize(Roles = "Admin, User")]
         // POST: Customer/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
@@ -81,7 +81,7 @@ namespace OnlineInstrumentStore.Controllers
                 return View("EditCustomer");
             }
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Customer/Delete/5
         public ActionResult Delete(Guid id)
         {
@@ -89,7 +89,7 @@ namespace OnlineInstrumentStore.Controllers
 
             return View("DeleteCustomer", customerModels);
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: Customer/Delete/5
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)

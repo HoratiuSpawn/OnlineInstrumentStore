@@ -190,6 +190,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ManufacturerModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\InstrumentRepository.cs" />
@@ -278,12 +279,12 @@
     <Content Include="Views\Customer\CustomerDetails.cshtml" />
     <Content Include="Views\Customer\CreateCustomer.cshtml" />
     <Content Include="Views\Customer\DeleteCustomer.cshtml" />
-    <Content Include="Views\Order\IndexOrders.cshtml" />
     <Content Include="Views\Order\OrderDetails.cshtml" />
     <Content Include="Views\Order\EditOrder.cshtml" />
     <Content Include="Views\Order\DeleteOrder.cshtml" />
     <Content Include="Views\Customer\EditCustomer.cshtml" />
     <Content Include="Views\Order\CreateOrder.cshtml" />
+    <Content Include="Views\Order\IndexOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

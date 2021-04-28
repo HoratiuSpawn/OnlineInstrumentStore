@@ -121,5 +121,14 @@ namespace OnlineInstrumentStore.Repository
             }
             return null;
         }
+        public List<OrderModels> GetAllOrdersByCustomer(Guid ID)
+        {
+            List<OrderModels> orderList = new List<OrderModels>();
+            foreach (Order dbOrder in dbContext.Orders.Where(x=> x.IDCustomer == ID))
+            {
+                orderList.Add(MapDbObjectToModel(dbOrder));
+            }
+            return orderList;
+        }
     }
 }
