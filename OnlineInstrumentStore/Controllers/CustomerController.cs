@@ -11,7 +11,7 @@ namespace OnlineInstrumentStore.Controllers
     public class CustomerController : Controller
     {
         private CustomerRepository customerRepository = new CustomerRepository();
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin")]
         // GET: Customer
         public ActionResult Index()
         {

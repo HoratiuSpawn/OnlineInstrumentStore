@@ -20,27 +20,27 @@
         <elementListCompartment Id="5eee90c7-04d9-4567-aa90-fa555e29f4b5" absoluteBounds="3.515, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a24a1965-9835-4c28-a3b3-e91795e4ad1e" absoluteBounds="3.5, 5.125, 2, 1.7708968098958327">
+    <classShape Id="a24a1965-9835-4c28-a3b3-e91795e4ad1e" absoluteBounds="3.5, 4, 2, 1.7708968098958327">
       <DataClassMoniker Name="/OnlineInstrumentStoreDataContextDataContext/Customer" />
       <nestedChildShapes>
-        <elementListCompartment Id="959b064c-4695-4445-8dcb-32d66ba24ae7" absoluteBounds="3.515, 5.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="959b064c-4695-4445-8dcb-32d66ba24ae7" absoluteBounds="3.515, 4.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 1.98159912109375); (6.25 : 1.98159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 1.98159912109375); (6.25 : 1.98159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/OnlineInstrumentStoreDataContextDataContext/Instrument/Instrument_Order" />
       <nodes>
         <classShapeMoniker Id="7c874a11-1e01-4aff-8022-93d5a5c8f4db" />
         <classShapeMoniker Id="56dcba5d-dbd7-4b5f-a505-9fa74a00ae28" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 1.97199625651042); (3.5 : 1.97199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 1.97199625651042); (3.5 : 1.97199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/OnlineInstrumentStoreDataContextDataContext/Manufacturer/Manufacturer_Instrument" />
       <nodes>
         <classShapeMoniker Id="ba4bf9bd-6adf-4c69-b154-417531c11d90" />
         <classShapeMoniker Id="7c874a11-1e01-4aff-8022-93d5a5c8f4db" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 6.01044840494792); (7.25 : 6.01044840494792); (7.25 : 3.03049967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 4.88544840494792); (7.25 : 4.88544840494792); (7.25 : 3.03049967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/OnlineInstrumentStoreDataContextDataContext/Customer/Customer_Order" />
       <nodes>
         <classShapeMoniker Id="a24a1965-9835-4c28-a3b3-e91795e4ad1e" />
